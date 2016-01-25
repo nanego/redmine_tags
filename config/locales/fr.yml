@@ -1,20 +1,28 @@
 fr:
-  tags: Tags
-  field_tags: Tags
-  field_tag_list: Tags
-  setting_issue_tags: Tags des demandes
-  issues_sidebar: Afficher les Tags comme
-  issues_show_count: Afficher le nombre de demande
-  issues_open_only: N'afficher que les demandes ouvertes
-  issues_sort_by: (en) Sort tags by
+  tags: Sources
+  field_tags: Sources
+  field_tag_list: Sources
+  setting_issue_tags: Sources des événements
+  issues_sidebar: Afficher les Sources comme
+  issues_show_count: Afficher le nombre d'événement
+  issues_open_only: N'afficher que les événement ouverts
+  issues_sort_by: Sources triées par
+  issues_use_colors: Utiliser des couleurs
 
   issue_tags_sidebar_none: Ne pas afficher
   issue_tags_sidebar_list: Liste
   issue_tags_sidebar_cloud: Nuage
+  issue_tags_sidebar_simple_cloud: Simple cloud
 
-  issues_sort_by_name: (en) Name
-  issues_sort_by_count: (en) Issues amount
-  issues_sort_order_asc: (en) Ascending
-  issues_sort_order_desc: (en) Descending
+  issues_sort_by_name: Nom
+  issues_sort_by_count: Nombre d'événements
+  issues_sort_order_asc: Croissant
+  issues_sort_order_desc: Décroissant
 
   auto_complete_new_tag: Nouveau...
+
+  issue_tags_label_add_tag: + ajouter une source
+  issue_tags_manage_tags: Gérer les sources
+  issue_tags_tag: Source
+  issue_tags_button_merge: Merge
+  issue_tags_label_merge: Merge selected sources

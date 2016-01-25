@@ -47,9 +47,7 @@ ul.tagit li.tagit-choice .tagit-close .text-icon {
 }
 
 ul.tagit li.tagit-choice input {
-    display: block;
-    float: left;
-    margin: 2px 5px 2px 0;
+    margin: -2px 5px 2px 10px;
 }
 ul.tagit input[type="text"] {
     -moz-box-sizing:    border-box;

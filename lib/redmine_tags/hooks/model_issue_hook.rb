@@ -3,10 +3,12 @@ module RedmineTags
     class ModelIssueHook < Redmine::Hook::ViewListener
       def controller_issues_edit_before_save(context = {})
         save_tags_to_issue context, true
+        save_details_per_tag context
       end
 
       def controller_issues_bulk_edit_before_save(context = {})
         save_tags_to_issue context, true
+        save_details_per_tag context
       end
 
       # Issue has an after_save method that calls reload (update_nested_set_attributes)
@@ -16,6 +18,7 @@ module RedmineTags
       def controller_issues_new_after_save(context = {})
         save_tags_to_issue context, false
         context[:issue].save
+        save_details_per_tag context
       end
 
       def save_tags_to_issue(context, create_journal)
@@ -36,6 +39,17 @@ module RedmineTags
           end
 
           Issue.remove_unused_tags!
+        end
+      end
+
+      def save_details_per_tag(context)
+        # Add details to tags
+        if context[:params]['tags'].present?
+          context[:issue].reload.tags.each do |tag|
+            tagging = tag.taggings.where(taggable_id: context[:issue].id, taggable_type: Issue.name).first
+            tagging.details = context[:params]['tags'][tag.name]['details']
+            tagging.save
+          end
         end
       end
     end

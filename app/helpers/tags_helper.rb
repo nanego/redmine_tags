@@ -41,6 +41,9 @@ module TagsHelper
     if options[:show_count]
       content << content_tag('span', "(#{ tag.count })", class: 'tag-count')
     end
+    if tag.details.present?
+      content << content_tag('span', "(#{ tag.details })", class: 'tag-count')
+    end
     style = if RedmineTags.settings[:issues_use_colors].to_i > 0
         { class: 'tag-label-color',
           style: "background-color: #{ tag_color tag }" }

@@ -1,8 +1,14 @@
+<%
+  issue.tags.each do |tag|
+    tag.details = tag.taggings.where(taggable_type: Issue.to_s, taggable_id: issue.id).first.details
+  end
+  %>
+
 <% unless issue.tag_list.empty? %>
   <tr>
     <th><%= l :tags %>:</th>
     <td colspan="3">
-      <%= safe_join(issue.tag_counts.collect {|t| render_tag_link(t, show_count: false, open_only: false) }, RedmineTags.settings[:issues_use_colors].to_i > 0 ? ' ' : ', ') %>
+      <%= safe_join(issue.tags.collect {|t| render_tag_link(t, show_count: false, open_only: false) }, RedmineTags.settings[:issues_use_colors].to_i > 0 ? ' ' : ', ') %>
     </td>
   </tr>
 <% end %>

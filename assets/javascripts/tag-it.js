@@ -94,6 +94,8 @@
       onTagClicked        : null,
       onTagLimitExceeded  : null,
 
+      details : '',
+
 
       // DEPRECATED:
       //
@@ -184,10 +186,14 @@
               that._trigger('onTagClicked', e, {tag: tag, tagLabel: that.tagLabel(tag)});
             }
           } else {
-            // Sets the focus() to the input field, if the user
-            // clicks anywhere inside the UL. This is needed
-            // because the input field needs to be of a small size.
-            that.tagInput.focus();
+            if (target.hasClass('tagit-details')){
+              e.preventDefault;
+            }else{
+              // Sets the focus() to the input field, if the user
+              // clicks anywhere inside the UL. This is needed
+              // because the input field needs to be of a small size.
+              that.tagInput.focus();
+            }
           }
         });
 
@@ -198,9 +204,14 @@
           // Add existing tags from the input field.
           var node = $(this.options.singleFieldNode);
           var tags = node.val().split(this.options.singleFieldDelimiter);
+
+          // Add existing tags details from the hidden input field.
+          var details_node = $(this.options.details);
+          var details = details_node.val().split(this.options.singleFieldDelimiter);
+
           node.val('');
           $.each(tags, function(index, tag) {
-            that.createTag(tag, null, true);
+            that.createTag(tag, null, true, details[index]);
             addedExistingFromSingleFieldNode = true;
           });
         } else {
@@ -436,10 +447,11 @@
       return Boolean($.effects && ($.effects[name] || ($.effects.effect && $.effects.effect[name])));
     },
 
-    createTag: function(value, additionalClass, duringInitialization) {
+    createTag: function(value, additionalClass, duringInitialization, detail) {
       var that = this;
 
       value = $.trim(value);
+      detail = $.trim(detail);
 
       if(this.options.preprocessTag) {
         value = this.options.preprocessTag(value);
@@ -475,6 +487,8 @@
         .addClass(additionalClass)
         .append(label);
 
+      var tag_detail = $('<span><input value="'+detail+'" class="tagit-details" placeholder="Heure de la source" type="text" name="'+this.options.fieldName+'['+value+'][details]"></span>');
+
       if (this.options.readOnly){
         tag.addClass('tagit-choice-read-only');
       } else {
@@ -489,6 +503,7 @@
             // Removes a tag when the little 'x' is clicked.
             that.removeTag(tag);
           });
+        tag.append(tag_detail);
         tag.append(removeTag);
       }
 
