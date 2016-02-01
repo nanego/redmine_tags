@@ -45,7 +45,7 @@ module RedmineTags
       def save_details_per_tag(context)
         # Add details to tags
         if context[:params]['tags'].present?
-          context[:issue].reload.tags.each do |tag|
+          context[:issue].tags.each do |tag|
             tagging = tag.taggings.where(taggable_id: context[:issue].id, taggable_type: Issue.name).first
             tagging.details = context[:params]['tags'][tag.name]['details']
             tagging.save
