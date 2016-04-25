@@ -89,6 +89,7 @@ module TagsHelper
           logger.warn "[redmine_tags] Unknown sorting option: <#{ sorting }>"
           tags.sort! {|a, b| a.name <=> b.name }
       end
+
       if :list == style
         list_el, item_el = 'ul', 'li'
       elsif :simple_cloud == style
